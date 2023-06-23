@@ -1,7 +1,10 @@
 // See https://github.com/typicode/json-server#module
 const jsonServer = require('json-server')
+const fs = require('fs')
+const path = require('path')
+const db = JSON.parse(fs.readFileSync(path.join(__dirname, 'tmp/db.json')))
+const router = jsonServer.router(db)
 const server = jsonServer.create()
-const router = jsonServer.router('db.json')
 const middlewares = jsonServer.defaults()
 
 server.use(middlewares)
